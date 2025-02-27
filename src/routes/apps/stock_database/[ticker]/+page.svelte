@@ -4,7 +4,7 @@
     const prices = page.data.data;
 </script>
 
-<h1>tickers</h1>
+<h1>Prices</h1>
 
 <table>
     <thead>
