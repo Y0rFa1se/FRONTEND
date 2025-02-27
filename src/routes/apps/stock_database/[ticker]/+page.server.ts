@@ -7,6 +7,8 @@ export async function load({ params }) {
             const response = await fetch(url);
             const prices = await response.json();
 
+            console.log(prices);
+
             return { data: prices };
         } catch (error) {
             console.error(error);
