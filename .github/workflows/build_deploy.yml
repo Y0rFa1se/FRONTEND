@@ -36,6 +36,7 @@ jobs:
               cd FRONTEND
             fi
 
+            rm .env
             echo "${{ secrets.DOT_ENV }}" > .env
 
             if [ -n "$(docker ps -q -f "name=frontend-1")" ]; then
