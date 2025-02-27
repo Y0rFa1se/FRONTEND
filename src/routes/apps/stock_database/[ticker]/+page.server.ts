@@ -1,6 +1,11 @@
 export async function load({ params }) {
     const ticker = params.ticker;
-    const urls = ["http://192.168.0.18:8003/database/stock/prices" + ticker, "http://192.168.0.18:8004/database/stock/prices" + ticker];
+    const urls = [
+        "http://localhost:8003/database/stock/prices" + ticker,
+        "http://localhost:8004/database/stock/prices" + ticker,
+        "http://192.168.0.18:8003/database/stock/prices" + ticker,
+        "http://192.168.0.18:8004/database/stock/prices" + ticker,
+    ];
 
     for (const url of urls) {
         try {
