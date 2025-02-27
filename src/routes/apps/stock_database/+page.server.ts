@@ -1,6 +1,16 @@
 export async function load() {
-    const response = await fetch("http://192.168.0.18:8000/database/stock/tickers");
-    const tickers = await response.json();
+    const urls: string[] = ["http://localhost:8003/database/stock/tickers", "http://localhost:8004/database/stock/tickers"];
 
-    return { data: tickers };
+    for (const url of urls) {
+        try {
+            const response = await fetch(url);
+            const tickers = await response.json();
+
+            return { data: tickers };
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    throw new Error("All fetch attempts failed");
 }
