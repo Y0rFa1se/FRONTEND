@@ -3,10 +3,7 @@
     import { goto } from "$app/navigation";
 
     const urls: string[] = [
-        "http://192.168.0.18:8003/database/session/check",
-        "http://192.168.0.18:8004/database/session/check",
-        "http://localhost:8003/database/session/check",
-        "http://localhost:8004/database/session/check",
+        "https://y0rfa1se.duckdns.org/api/database/session/check",
     ];
 
     onMount(async () => {

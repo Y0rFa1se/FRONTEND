@@ -1,9 +1,6 @@
 export async function load() {
     const urls: string[] = [
-        "http://192.168.0.18:8003/database/stock/tickers",
-        "http://192.168.0.18:8004/database/stock/tickers",
-        "http://localhost:8003/database/stock/tickers",
-        "http://localhost:8004/database/stock/tickers",
+        "https://y0rfa1se.duckdns.org/api/database/stock/tickers",
     ];
 
     for (const url of urls) {
