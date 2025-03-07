@@ -3,10 +3,10 @@
     import { goto } from "$app/navigation";
 
     const urls: string[] = [
-        "https://192.168.0.18:8003/database/session/check",
-        "https://192.168.0.18:8004/database/session/check",
-        "https://localhost:8003/database/session/check",
-        "https://localhost:8004/database/session/check",
+        "http://192.168.0.18:8003/database/session/check",
+        "http://192.168.0.18:8004/database/session/check",
+        "http://localhost:8003/database/session/check",
+        "http://localhost:8004/database/session/check",
     ];
 
     onMount(async () => {
