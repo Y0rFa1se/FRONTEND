@@ -2,15 +2,12 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
 
-    const urls: string[] = [
-        "http://192.168.0.18:8003/database/session/check",
-        "http://192.168.0.18:8004/database/session/check",
-        "http://localhost:8003/database/session/check",
-        "http://localhost:8004/database/session/check",
-    ];
-
     onMount(async () => {
         console.log("onMount");
+
+        const urls: string[] = [
+            "https://y0rfa1se.duckdns.org/api/database/session/check",
+        ];
 
         const cookies = document.cookie;
         console.log(cookies);
@@ -43,6 +40,10 @@
     });
 
     const login = async (event: any) => {
+        const urls: string[] = [
+            "https://y0rfa1se.duckdns.org/api/database/session/login",
+        ];
+
         event.preventDefault();
         const formData = new FormData(event.target);
 
