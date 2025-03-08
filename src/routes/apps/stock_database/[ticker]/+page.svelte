@@ -47,7 +47,7 @@
                     const response = await fetch(url);
                     const result = await response.json();
 
-                    prices = result.data.data;
+                    prices = result;
                 } else {
                     console.error("Session invalid:", result);
                     goto("/"); // 유효하지 않은 세션일 경우 리다이렉트
