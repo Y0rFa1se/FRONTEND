@@ -22,8 +22,12 @@ export const load: PageServerLoad = async ({ params }) => {
                 const result = await response.json();
 
                 if (result.success) {
+                    console.log(result);
+
                     return { "session_id": sessionId };
                 } else {
+                    console.log(result);
+
                     throw redirect(303, "/");
                 }
             } catch (error) {
