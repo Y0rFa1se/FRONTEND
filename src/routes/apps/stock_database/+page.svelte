@@ -44,7 +44,7 @@
                     const response = await fetch(url);
                     const result = await response.json();
 
-                    tickers = result.data.data;
+                    tickers = result.data;
 
                     console.log(tickers);
                 } else {
