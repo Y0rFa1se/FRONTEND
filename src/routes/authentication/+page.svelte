@@ -2,11 +2,13 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
 
+    const base_url = import.meta.env.VITE_BASE_URL;
+
     onMount(async () => {
         console.log("onMount");
 
         const urls: string[] = [
-            "https://y0rfa1se.duckdns.org/api/database/session/check",
+            base_url + "/database/session/check",
         ];
 
         const cookies = document.cookie;
@@ -41,7 +43,7 @@
 
     const login = async (event: any) => {
         const urls: string[] = [
-            "https://y0rfa1se.duckdns.org/api/database/session/login",
+            base_url + "/database/session/login",
         ];
 
         event.preventDefault();

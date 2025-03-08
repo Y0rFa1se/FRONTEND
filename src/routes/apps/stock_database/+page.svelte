@@ -1,28 +1,28 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
     let tickers: any;
 
-    // 쿠키에서 세션 ID 가져오기
-    const cookies = document.cookie;
-    console.log("Cookies:", cookies);
+    onMount(async () => {
+        const base_url = import.meta.env.VITE_BASE_URL;
 
-    const sessionCookie = cookies
-        .split(";")
-        .find((cookie) => cookie.trim().startsWith("session_id="));
-    const sessionId = sessionCookie?.split("=")[1];
+        // 쿠키에서 세션 ID 가져오기
+        const cookies = document.cookie;
+        console.log("Cookies:", cookies);
 
-    console.log("Session ID:", sessionId);
+        const sessionCookie = cookies
+            .split(";")
+            .find((cookie) => cookie.trim().startsWith("session_id="));
+        const sessionId = sessionCookie?.split("=")[1];
 
-    // 비동기 함수로 API 호출 및 처리
-    async function checkSessions() {
-        const url = "https://y0rfa1se.duckdns.org/api/database/stock/tickers?session_id=" + sessionId;
+        console.log("Session ID:", sessionId);
+
+        const url = base_url + "/database/stock/tickers?session_id=" + sessionId;
         const response = await fetch(url);
         const result = await response.json();
 
         tickers = result;
-    }
-
-    // 페이지 로드 시 세션 확인 실행
-    checkSessions();
+    });
 </script>
 
 <h1>tickers</h1>
