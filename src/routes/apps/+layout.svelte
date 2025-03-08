@@ -51,8 +51,23 @@ import { page } from "$app/state";
         }
     }
 
+    const logout = async () => {
+        const url = "https://y0rfa1se.duckdns.org/api/database/session/logout?session_id=" + sessionId;
+        const response = await fetch(url);
+
+        if (response.ok) {
+            console.log("Logout successful");
+            document.cookie = "session_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            goto("/");
+        } else {
+            console.error("Logout failed");
+        }
+    }
+
     // 페이지 로드 시 세션 확인 실행
     checkSessions();
 </script>
+
+<button onclick={logout}>Logout</button>
 
 <slot />
