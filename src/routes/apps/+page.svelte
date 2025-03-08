@@ -1,35 +1,55 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
 
+    // API URL 리스트
     const urls: string[] = [
         "https://y0rfa1se.duckdns.org/api/database/session/check",
     ];
 
+    // 쿠키에서 세션 ID 가져오기
     const cookies = document.cookie;
-    console.log(cookies);
+    console.log("Cookies:", cookies);
+
     const sessionCookie = cookies
         .split(";")
         .find((cookie) => cookie.trim().startsWith("session_id="));
     const sessionId = sessionCookie?.split("=")[1];
 
-    console.log("apps / " + sessionId);
+    console.log("Session ID:", sessionId);
 
-    for (const _url of urls) {
-        try {
-            const response = fetch(_url + "?session_id=" + sessionId);
-            const result = response.json();
+    // 비동기 함수로 API 호출 및 처리
+    async function checkSessions() {
+        if (!sessionId) {
+            console.error("Session ID not found.");
+            goto("/"); // 세션 ID가 없을 경우 리다이렉트
+            return;
+        }
 
-            if (result.success) {
-                console.log("apps / " + result);
-            } else {
-                console.log(result);
+        for (const _url of urls) {
+            try {
+                const response = await fetch(`${_url}?session_id=${sessionId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-                goto("/");
+                const result = await response.json();
+                console.log("API Response:", result);
+
+                if (result.success) {
+                    console.log("Session valid:", result);
+                } else {
+                    console.error("Session invalid:", result);
+                    goto("/"); // 유효하지 않은 세션일 경우 리다이렉트
+                }
+            } catch (error) {
+                console.error("Error during API request:", error);
+                goto("/"); // 에러 발생 시 리다이렉트
             }
-        } catch (error) {
-            console.error(error);
         }
     }
+
+    // 페이지 로드 시 세션 확인 실행
+    checkSessions();
 </script>
 
 <h1>Apps</h1>
