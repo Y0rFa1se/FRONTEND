@@ -5,6 +5,7 @@
     let prices: any;
 
     const ticker = page.data.data;
+    console.log(ticker);
 
     const urls: string[] = [
         "https://y0rfa1se.duckdns.org/api/database/session/check",

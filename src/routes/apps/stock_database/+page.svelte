@@ -45,6 +45,8 @@
                     const result = await response.json();
 
                     tickers = result.data.data;
+
+                    console.log(tickers);
                 } else {
                     console.error("Session invalid:", result);
                     goto("/"); // 유효하지 않은 세션일 경우 리다이렉트
