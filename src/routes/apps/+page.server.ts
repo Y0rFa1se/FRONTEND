@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ params }) => {
         .find((cookie) => cookie.trim().startsWith("session_id="));
     const sessionId = sessionCookie?.split("=")[1];
 
-    console.log(sessionId);
+    console.log("apps / " + sessionId);
 
     if (sessionId) {
         for (const _url of urls) {
@@ -22,7 +22,7 @@ export const load: PageServerLoad = async ({ params }) => {
                 const result = await response.json();
 
                 if (result.success) {
-                    console.log(result);
+                    console.log("apps / " + result);
 
                     return { "session_id": sessionId };
                 } else {
