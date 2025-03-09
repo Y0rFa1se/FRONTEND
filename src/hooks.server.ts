@@ -22,7 +22,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
             return response;
         } else {
-            return Response.redirect(`${event.url.protocol}//${event.url.host}/`, 303);
+            return Response.redirect(`${event.url.protocol}//${event.url.host}?redirectTo=${event.url.pathname}`, 303);
         }
     }
 

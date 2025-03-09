@@ -20,9 +20,9 @@
 
         logout = async () => {
             const url = base_url + "/database/session/logout?session_id=" + sessionId;
-            const response = await fetch(url);
+            const response = await (await fetch(url)).json();
 
-            if (response.ok) {
+            if (response.success) {
                 console.log("Logout successful");
                 document.cookie = "session_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 goto("/");
