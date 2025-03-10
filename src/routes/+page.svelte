@@ -59,7 +59,7 @@
 <h1>Login</h1>
 
 {#each users as user}
-    <a href="/authentication?username={ user.username }&redirectTo={ redirectTo }">{ user.username }</a>
+    <a href="/authentication?username={ user.username }&redirectTo={ redirectTo }">{ user.username }</a> <br>
 {/each}
 
 <p><a href="https://github.com/Y0rFa1se">Github</a></p>

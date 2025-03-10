@@ -39,6 +39,28 @@
                 }
             }
         }
+
+        const username = new URLSearchParams(window.location.search).get("username");
+        const redirectTo = new URLSearchParams(window.location.search).get("redirectTo") || "/";
+
+        if (username === "guest") {
+            console.log("guest");
+
+            try {
+                const response = await fetch(base_url + "/database/session/login?username=guest&password=password");
+                const result = await response.json();
+                
+                if (result.success && result.session_id) {
+                    document.cookie = `session_id=${result.session_id}; path=/; max-age=${60 * 60};`;
+
+                    console.log("success");
+                    console.log(redirectTo);
+                    goto(redirectTo);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
     });
 
     const login = async (event: any) => {
@@ -49,8 +71,8 @@
         event.preventDefault();
         const formData = new FormData(event.target);
 
-        const password = formData.get("password");
         const username = new URLSearchParams(window.location.search).get("username");
+        const password = formData.get("password");
         const redirectTo = new URLSearchParams(window.location.search).get("redirectTo") || "/";
 
         for (const _url of urls) {
