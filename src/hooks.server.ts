@@ -1,4 +1,3 @@
-import { base } from "$service-worker";
 import type { Handle } from "@sveltejs/kit";
 
 const base_url = import.meta.env.VITE_BASE_URL;
@@ -26,20 +25,29 @@ export const handle: Handle = async ({ event, resolve }) => {
         const response3 = await fetch(url3);
         const result3 = await response3.json();
 
-        if (result.success && (result3.permission === undefined || result2.permission >= result3.permission)) {
+        console.log(result);
+        console.log(result2);
+        console.log(result3);
+
+        if (result.success && (result3.error || result2.permission >= result3.permission)) {
             console.log("Session is valid");
 
             const response = await resolve(event);
 
             return response;
-        } else if (result2.permission === 0 && (result3.permission === undefined || result3.permission === 0)) {
+        } else if ((result2.permission === 0 || result2.error) && (result3.error || result3.permission === 0)) {
             console.log("guest");
 
             const response4 = await fetch(base_url + "/database/session/login?username=guest&password=password");
             const result4 = await response4.json();
 
             if (result4.success && result4.session_id) {
-                document.cookie = `session_id=${result4.session_id}; path=/; max-age=${60 * 60}`;
+                console.log("Logged in as guest");
+
+                event.cookies.set('session_id', result4.session_id, {
+                    path: '/',
+                    maxAge: 60 * 60, // 1시간
+                });
 
                 return await resolve(event);
             } else {
